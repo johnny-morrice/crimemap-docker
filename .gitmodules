@@ -1,0 +1,3 @@
+[submodule "crimemap"]
+	path = crimemap
+	url = git@github.com:johnny-morrice/crimemap

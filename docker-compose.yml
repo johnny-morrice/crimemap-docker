@@ -1,0 +1,22 @@
+crimemap:
+  restart: always
+  build: ./crimemap/crimemap
+  expose:
+    - "8000"
+  volumes:
+    - /usr/src/app/static
+    - datavolume:/usr/src/app/database
+  env_file: .env
+  command: /usr/local/bin/gunicorn -w 2 -b :8000 crimemap:app
+
+nginx:
+  restart: always
+  build: ./nginx/
+  ports:
+    - "80:80"
+  volumes:
+    - /www/static
+  volumes_from:
+    - crimemap
+  links:
+    - crimemap:crimemap
